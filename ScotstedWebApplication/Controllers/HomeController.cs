@@ -5,11 +5,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ScotstedWebApplication.Models;
+using ScotstedWebApplication.Services;
 
 namespace ScotstedWebApplication.Controllers
 {
     public class HomeController : Controller
     {
+        private SearchService _searchService;
+
+        public HomeController(SearchService searchService)
+        {
+            this._searchService = searchService;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -33,5 +41,21 @@ namespace ScotstedWebApplication.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public string Index2()
+        {
+            return "Hello world!";
+        }
+
+        public IActionResult Search(SearchModel searchModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var viewModel = _searchService.Search(searchModel);
+                return View(viewModel);
+            }
+            return Redirect("/");
+        }
+
     }
 }
