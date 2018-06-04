@@ -13,9 +13,9 @@ namespace ScotstedWebApplication.Controllers
     {
         private SearchService _searchService;
 
-        public HomeController(SearchService searchService)
+        public HomeController()
         {
-            this._searchService = searchService;
+            this._searchService = new SearchService();
         }
 
         public IActionResult Index()

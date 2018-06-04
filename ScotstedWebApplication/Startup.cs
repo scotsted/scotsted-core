@@ -49,6 +49,13 @@ namespace ScotstedWebApplication
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "api",
+                    template: "api/{controller}/{action=index}/{id?}");
+                routes.MapRoute(
+                    name: "currency_by_code",
+                    template: "currency/{code}",
+                    defaults: new { controller = "Currencies", action = "View2" });
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
