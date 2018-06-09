@@ -53,6 +53,10 @@ namespace ScotstedWebApplication
                     name: "api",
                     template: "api/{controller}/{action=index}/{id?}");
                 routes.MapRoute(
+                    name: "view_currency",
+                    template: "{controller=currency}/{action=view}/{code}"
+                );
+                routes.MapRoute(
                     name: "currency_by_code",
                     template: "currency/{code:length(3)}",
                     defaults: new { controller = "Currencies", action = "View2" });
