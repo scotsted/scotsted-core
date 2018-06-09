@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -53,11 +54,41 @@ namespace ScotstedWebApplication
                     template: "api/{controller}/{action=index}/{id?}");
                 routes.MapRoute(
                     name: "currency_by_code",
-                    template: "currency/{code}",
+                    template: "currency/{code:length(3)}",
                     defaults: new { controller = "Currencies", action = "View2" });
                 routes.MapRoute(
+                    name: "currencies",
+                    template: "{currency}/{action}",
+                    defaults: new
+                    {
+                        controller = "currencies",
+                        currency = "GBP",
+                        action = "View2"
+                    },
+                    constraints: new
+                    {
+                        currency = new LengthRouteConstraint(3)
+                    }
+                );
+                routes.MapRoute(
+                    name: "convert_currencies",
+                    template: "{currency}/convert/{*others}",
+                    defaults: new { controller = "currencies", action = "View2" }
+                );
+                routes.MapRoute(
+                    name: "start_checkout",
+                    template: "checkout",
+                    defaults: new { controller = "Payment", action = "StartProcess" }
+                );
+                routes.MapRoute(
+                    name: "currency_default",
+                    template: "{controller}/{currency}/{action}",
+                    defaults: new { currency = "GBP", action = "View2" },
+                    constraints: new { currency = new LengthRouteConstraint(3) });
+                routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}"
+                );
             });
         }
     }

@@ -6,17 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ScotstedWebApplication.Controllers
 {
-    public class CurrenciesController : Controller
+    public class PaymentController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult View2()
+        public IActionResult StartProcess()
         {
             return View();
         }
-
     }
 }
