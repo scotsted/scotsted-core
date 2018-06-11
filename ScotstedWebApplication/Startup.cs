@@ -50,6 +50,10 @@ namespace ScotstedWebApplication
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "calcuator",
+                    template: "{controller}/{action}/{value}"
+                );
+                routes.MapRoute(
                     name: "api",
                     template: "api/{controller}/{action=index}/{id?}");
                 routes.MapRoute(
