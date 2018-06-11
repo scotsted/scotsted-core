@@ -1,5 +1,4 @@
-﻿using System;
-using ScotstedWebApplication.Models;
+﻿using ScotstedWebApplication.Models;
 
 namespace ScotstedWebApplication.Services
 {
